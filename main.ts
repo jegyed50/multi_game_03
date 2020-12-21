@@ -53,15 +53,12 @@ input.onButtonPressed(Button.B, function () {
     game_init(game_tomb[game_sorszam])
 })
 function game_B () {
-    if (game_sorszam == 1) {
-        basic.showLeds(`
-            . # . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
-        basic.pause(500)
+    while (game_sorszam == 1) {
+        if (game_sorszam == 1) {
+        	
+        } else {
+            break;
+        }
     }
 }
 let game_sorszam = 0
