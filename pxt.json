@@ -1,10 +1,11 @@
 {
-    "name": "multi_game_03",
+    "name": "multi_game_03_ringbit_car",
     "description": "",
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "RingbitCar": "github:tinkertanker/pxt-ringbitcar#v3.0.3"
     },
     "files": [
         "main.blocks",
