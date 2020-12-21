@@ -45,6 +45,7 @@ input.onButtonPressed(Button.AB, function () {
     control.reset()
 })
 input.onButtonPressed(Button.B, function () {
+    RingbitCar.brake()
     if (game_sorszam < game_tomb.length - 1) {
         game_sorszam += 1
     } else {
@@ -67,7 +68,9 @@ function game_B () {
             } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_3)) {
                 RingbitCar.freestyle(sebesseg, 0)
             }
+            basic.pause(100)
         } else {
+            RingbitCar.brake()
             break;
         }
     }
@@ -75,6 +78,7 @@ function game_B () {
 let sebesseg = 0
 let game_sorszam = 0
 let game_tomb: string[] = []
+led.setBrightness(30)
 // game_tomb = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 game_tomb = ["A", "B", "C"]
 game_sorszam = 0
