@@ -53,14 +53,26 @@ input.onButtonPressed(Button.B, function () {
     game_init(game_tomb[game_sorszam])
 })
 function game_B () {
+    sebesseg = 75
+    RingbitCar.init_wheel(AnalogPin.P1, AnalogPin.P2)
+    RingbitCar.freestyle(sebesseg, sebesseg)
     while (game_sorszam == 1) {
         if (game_sorszam == 1) {
-        	
+            if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_1)) {
+                RingbitCar.freestyle(0, sebesseg)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_2)) {
+                RingbitCar.freestyle(sebesseg, 0)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_0)) {
+                RingbitCar.freestyle(sebesseg, sebesseg)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_3)) {
+                RingbitCar.freestyle(sebesseg, 0)
+            }
         } else {
             break;
         }
     }
 }
+let sebesseg = 0
 let game_sorszam = 0
 let game_tomb: string[] = []
 // game_tomb = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
