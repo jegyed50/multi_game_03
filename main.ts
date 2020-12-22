@@ -9,17 +9,23 @@ input.onButtonPressed(Button.A, function () {
     game_init(game_tomb[game_sorszam])
 })
 function game_A () {
+    sebesseg = 75
+    RingbitCar.init_wheel(AnalogPin.P1, AnalogPin.P2)
+    RingbitCar.freestyle(sebesseg, sebesseg)
     while (game_sorszam == 0) {
         if (game_sorszam == 0) {
-            basic.clearScreen()
-            for (let index = 0; index <= 4; index++) {
-                led.plot(index, 0)
-                basic.pause(200)
-                if (game_sorszam != 0) {
-                    break;
-                }
+            if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_1)) {
+                RingbitCar.freestyle(0, sebesseg)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_2)) {
+                RingbitCar.freestyle(sebesseg, 0)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_0)) {
+                RingbitCar.freestyle(sebesseg, sebesseg)
+            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_3)) {
+                RingbitCar.freestyle(sebesseg, 0)
             }
+            basic.pause(100)
         } else {
+            RingbitCar.brake()
             break;
         }
     }
@@ -41,6 +47,22 @@ function game_C () {
         basic.pause(500)
     }
 }
+function game_X () {
+    while (game_sorszam == 25) {
+        if (game_sorszam == 25) {
+            basic.clearScreen()
+            for (let index = 0; index <= 4; index++) {
+                led.plot(index, 0)
+                basic.pause(200)
+                if (game_sorszam != 25) {
+                    break;
+                }
+            }
+        } else {
+            break;
+        }
+    }
+}
 input.onButtonPressed(Button.AB, function () {
     control.reset()
 })
@@ -54,27 +76,16 @@ input.onButtonPressed(Button.B, function () {
     game_init(game_tomb[game_sorszam])
 })
 function game_B () {
-    sebesseg = 75
-    RingbitCar.init_wheel(AnalogPin.P1, AnalogPin.P2)
-    RingbitCar.freestyle(sebesseg, sebesseg)
-    while (game_sorszam == 1) {
-        if (game_sorszam == 1) {
-            if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_1)) {
-                RingbitCar.freestyle(0, sebesseg)
-            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_2)) {
-                RingbitCar.freestyle(sebesseg, 0)
-            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_0)) {
-                RingbitCar.freestyle(sebesseg, sebesseg)
-            } else if (RingbitCar.tracking(RingbitCar.TrackingStateType.Tracking_State_3)) {
-                RingbitCar.freestyle(sebesseg, 0)
-            }
-            basic.pause(100)
-        } else {
-            RingbitCar.brake()
-            break;
-        }
+    if (game_sorszam == 1) {
+        let sebesseg_balra = 0
+        RingbitCar.init_wheel(AnalogPin.P1, AnalogPin.P2)
+        sebesseg_jobbra = randint(-100, 100)
+        sebesseg_jobbra = randint(-100, 100)
+        RingbitCar.freestyle(sebesseg_balra, sebesseg_jobbra)
+        basic.pause(1000)
     }
 }
+let sebesseg_jobbra = 0
 let sebesseg = 0
 let game_sorszam = 0
 let game_tomb: string[] = []
